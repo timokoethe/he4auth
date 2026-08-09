@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+
+/* Face-scanner animations */
+@keyframes scanline {
+  0%   { transform: translateY(-46%); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { transform: translateY(46%); opacity: 0; }
+}
+
+@keyframes ringpulse {
+  0%, 100% { transform: scale(1);    opacity: 0.55; }
+  50%      { transform: scale(1.04); opacity: 1; }
+}
+
+@keyframes popin {
+  0%   { transform: scale(0.4); opacity: 0; }
+  60%  { transform: scale(1.08); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -160% 0; }
+  100% { background-position: 260% 0; }
+}
+
+.anim-scanline { animation: scanline 1.1s ease-in-out infinite; }
+.anim-ringpulse { animation: ringpulse 1.6s ease-in-out infinite; }
+.anim-popin { animation: popin 0.45s cubic-bezier(0.2, 0.9, 0.3, 1.4) both; }
+.anim-shimmer {
+  background-image: linear-gradient(
+    100deg,
+    transparent 30%,
+    color-mix(in oklab, currentColor 22%, transparent) 50%,
+    transparent 70%
+  );
+  background-size: 220% 100%;
+  animation: shimmer 1.2s linear infinite;
+}
